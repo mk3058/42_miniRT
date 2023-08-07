@@ -6,11 +6,12 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 12:32:58 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/03 12:53:28 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/03 14:52:55 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "trace.h"
+#include "../object/object.h"
 
 t_ray	ray_primary(t_camera *cam, double u, double v)
 {
@@ -23,11 +24,18 @@ t_ray	ray_primary(t_camera *cam, double u, double v)
 	return (ray);
 }
 
-t_color	ray_color(t_ray *r)
+t_color	ray_color(t_ray *r, t_sphere *s)
 {
 	double	t;
 
-	t = 0.5 * (r->dir.y + 1.0);
-	return (v_add(v_mul_d(color_new(1, 1, 1), 1.0 - t), \
+	if (hit_sphere(*s, *r))
+	{
+		return (color_new(1, 0, 0));
+	}
+	else
+	{
+		t = 0.5 * (r->dir.y + 1.0);
+		return (v_add(v_mul_d(color_new(1, 1, 1), 1.0 - t), \
 			v_mul_d(color_new(0.5, 0.7, 1.0), t)));
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:26:25 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/03 13:05:46 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/03 14:52:23 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "../coordinate/cartesian.h"
 # include "../vector/vector.h"
+
+typedef struct s_sphere	t_sphere;
 
 typedef struct s_cam {
 	t_point	origin;
@@ -44,6 +46,6 @@ t_point		ray_at(t_ray *ray, double distance);
 t_color		color_new(double x, double y, double z);
 
 t_ray		ray_primary(t_camera *cam, double u, double v);
-t_color		ray_color(t_ray *r);
+t_color		ray_color(t_ray *r, t_sphere *s);
 
 #endif
