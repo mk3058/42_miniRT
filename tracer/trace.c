@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 12:32:58 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/03 14:52:55 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/07 14:11:16 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,15 @@ t_ray	ray_primary(t_camera *cam, double u, double v)
 
 t_color	ray_color(t_ray *r, t_sphere *s)
 {
-	double	t;
+	double			t;
+	t_vec			n;
+	t_hit_record	rec;
 
-	if (hit_sphere(*s, *r))
+	rec.tmin = 0;
+	rec.tmax = INFINITY;
+	if (hit_sphere(*s, *r, &rec))
 	{
-		return (color_new(1, 0, 0));
+		return (v_mul_d(v_add(rec.normal, color_new(1, 1, 1)), 0.5));
 	}
 	else
 	{
