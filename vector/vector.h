@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 15:30:55 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/03 12:56:53 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/07 18:18:01 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,7 @@ double	v_len(const t_vec vector);
 /** get (vector length)^2 */
 double	v_len_sq(const t_vec vector);
 
-/**
- * t_point3 print
- * t_point3 color3
- * t_vec3	v_min
- * 
-*/
+/** get vector composed of min element */
+t_vec	v_min(const t_vec a, const t_vec b);
 
 #endif

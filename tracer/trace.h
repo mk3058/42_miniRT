@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:26:25 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/07 15:38:50 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/07 18:33:00 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,8 @@
 
 # include "../coordinate/cartesian.h"
 # include "../vector/vector.h"
+# include "../object/object.h"
 # include <stdbool.h>
-
-typedef struct s_sphere	t_sphere;
-
-typedef enum e_object_type {
-	SP
-}	t_object_type;
-
-typedef struct s_object {
-	t_object_type	type;
-	void			*element;
-	void			*next;
-}	t_object;
-
 
 typedef struct s_cam {
 	t_point	origin;
@@ -58,7 +46,18 @@ typedef struct s_hit_record {
 	double	tmax;
 	double	t; //원점 - 교점 거리
 	bool	front_face;
+	t_color	albedo;
 }	t_hit_record;
+
+typedef struct s_scene {
+	t_image			image;
+	t_camera		camera;
+	t_object		*world;
+	t_object		*light;
+	t_ray			ray;
+	t_color			ambient;
+	t_hit_record	rec;
+}	t_scene;
 
 t_image		image_new(int width, int height);
 t_camera	camera_new(t_image *image, t_point origin);
@@ -67,6 +66,13 @@ t_point		ray_at(t_ray ray, double distance);
 t_color		color_new(double x, double y, double z);
 
 t_ray		ray_primary(t_camera *cam, double u, double v);
-t_color		ray_color(t_ray *r, t_object *world);
+t_color		ray_color(t_scene *scene);
+
+bool		hit(t_object *obj, t_ray *ray, t_hit_record *rec);
+bool		hit_object(t_object *obj, t_ray *ray, t_hit_record *rec);
+bool		hit_sphere(const t_object ob, const t_ray ray, t_hit_record *rec);
+t_scene		*scene_init(void);
+t_color		phong_lighting(t_scene *scene);
+t_color		point_light_get(t_scene *scene, t_light *light);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 14:21:58 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/07 15:39:58 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/07 17:59:01 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,24 @@
 
 # include "../coordinate/cartesian.h"
 # include "../vector/vector.h"
-# include "../tracer/trace.h"
 # include <stdbool.h>
+
+# define EPSILON 1e-15;
+
+typedef struct s_light {
+	t_point	origin;
+	t_color	color;
+	double	bright_ratio;
+}	t_light;
+
+typedef enum e_object_type {SP, LIGHT_POINT}	t_object_type;
+
+typedef struct s_object {
+	t_object_type	type;
+	t_color			albedo;
+	void			*element;
+	void			*next;
+}	t_object;
 
 typedef struct s_sphere {
 	t_point	center;
@@ -25,10 +41,9 @@ typedef struct s_sphere {
 }	t_sphere;
 
 t_sphere	*sphere_new(t_point center, double radius);
-t_object	*object(t_object_type type, void *element);
-bool		hit(t_object *obj, t_ray *ray, t_hit_record *rec);
-bool		hit_object(t_object *obj, t_ray *ray, t_hit_record *rec);
-bool		hit_sphere(const t_sphere sp, const t_ray ray, t_hit_record *rec);
+t_object	*object_new(t_object_type type, void *element, t_color albedo);
+t_light		*light_new(t_point origin, t_color color, double bright_ratio);
+
 void		oadd(t_object **head, t_object *new);
 t_object	*olast(t_object *head);
 
