@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 12:38:27 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/03 14:30:28 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/07 15:46:24 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,15 @@ int main()
 	t_image	canv;
 	t_camera	cam;
 	t_ray		ray;
-	t_sphere	sphere;
+	t_object	*obj;
 
 	//Scene setting;
 	canv = image_new(400, 300);
 	cam = camera_new(&canv, point_new(0, 0, 0));
-	sphere = sphere_new(point_new(0, 0, -5), 2);
+	obj = object(SP, sphere_new(point_new(-2, 0, -5), 2));
+	oadd(&obj, object(SP, sphere_new(point_new(2, 0, -5), 2)));
+	oadd(&obj, object(SP, sphere_new(point_new(0, -1000, 0), 990)));
+	oadd(&obj, object(SP, sphere_new(point_new(0, 2, -9), 4)));
 	
 	// 랜더링
 	// P3 는 색상값이 아스키코드라는 뜻, 그리고 다음 줄은 캔버스의 가로, 세로 픽셀 수, 마지막은 사용할 색상값
@@ -52,7 +55,7 @@ int main()
 			// 1 ~ 0
 			//ray from camera origin to pixel
 			ray = ray_primary(&cam, u, v);
-			pixel_color = ray_color(&ray, &sphere);
+			pixel_color = ray_color(&ray, obj);
 			write_color(pixel_color);
 			++i;
 		}

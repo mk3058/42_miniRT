@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:26:25 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/07 14:41:29 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/07 15:38:50 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@
 # include <stdbool.h>
 
 typedef struct s_sphere	t_sphere;
+
+typedef enum e_object_type {
+	SP
+}	t_object_type;
+
+typedef struct s_object {
+	t_object_type	type;
+	void			*element;
+	void			*next;
+}	t_object;
+
 
 typedef struct s_cam {
 	t_point	origin;
@@ -56,6 +67,6 @@ t_point		ray_at(t_ray ray, double distance);
 t_color		color_new(double x, double y, double z);
 
 t_ray		ray_primary(t_camera *cam, double u, double v);
-t_color		ray_color(t_ray *r, t_sphere *s);
+t_color		ray_color(t_ray *r, t_object *world);
 
 #endif

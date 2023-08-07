@@ -1,0 +1,10 @@
+{
+	"files.associations": {
+		"cartesian.h": "c",
+		"atomic": "c",
+		"functional": "c",
+		"locale": "c",
+		"memory": "c",
+		"optional": "c"
+	}
+}
