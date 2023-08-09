@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 14:21:58 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/07 17:59:01 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/09 13:15:44 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include "../vector/vector.h"
 # include <stdbool.h>
 
-# define EPSILON 1e-15;
+# define EPSILON 1e-6
+# define LUMEN 3
 
 typedef struct s_light {
 	t_point	origin;

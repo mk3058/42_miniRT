@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 12:32:58 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/07 18:57:57 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/09 13:15:33 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,14 +135,11 @@ t_scene	*scene_init(void)
 	scene = malloc(sizeof(t_scene));
 	scene->image = image_new(400, 300);
 	scene->camera = camera_new(&scene->image, point_new(0, 0, 0));
-	world = object_new(SP, sphere_new(point_new(-2, 0, -5), 2), color_new(1, 1, 1));
-	oadd(&world, object_new(SP, sphere_new(point_new(2, 0, -5), 2), color_new(1, 1, 1)));
-	oadd(&world, object_new(SP, sphere_new(point_new(0, 2, -9), 4), color_new(1, 1, 1)));
-	oadd(&world, object_new(SP, sphere_new(point_new(0, -1000, 0), 990), color_new(1, 1, 1)));
+	world = object_new(SP, sphere_new(point_new(-2, 0, -5), 2), color_new(0.5, 0, 0));
+	oadd(&world, object_new(SP, sphere_new(point_new(0, -1000, 0), 995), color_new(1, 1, 1)));
+	oadd(&world, object_new(SP, sphere_new(point_new(2, 0, -5), 2), color_new(0, 0.5, 0)));
 	scene->world = world;
-	scene->light = object_new(LIGHT_POINT, light_new(point_new(0, 5, 0), color_new(1, 0, 0), 1.0), color_new(0, 0, 0));
-	oadd(&scene->light, object_new(LIGHT_POINT, light_new(point_new(20.0, 5.0, -7.5), color_new(0, 1, 0), 1.0), color_new(1, 1, 1)));
-	oadd(&scene->light, object_new(LIGHT_POINT, light_new(point_new(-20.0, 5.0, -7.5), color_new(0, 0, 1), 1.0), color_new(1, 1, 1)));
+	scene->light = object_new(LIGHT_POINT, light_new(point_new(0, 20, 0), color_new(1, 1, 1), 1.0), color_new(0, 0, 0));
 	ka = 0.1;
 	scene->ambient = v_mul_d(color_new(1, 1, 1), ka);
 	return (scene);
@@ -169,10 +166,29 @@ t_color	point_light_get(t_scene *scene, t_light *light)
 {
 	t_color	diffuse;
 	t_vec	light_dir;
+	double	light_len;
+	t_ray	light_ray;
 	double	kd;
+	double	brightness;
 
 	light_dir = v_unit(v_sub(light->origin, scene->rec.p));
+	light_len = v_len(v_sub(light->origin, scene->rec.p));
+	light_ray = ray_new(v_add(scene->rec.p, v_mul_d(scene->rec.normal, EPSILON)), light_dir);
+	if (in_shadow(scene->world, light_ray, light_len))
+		return (color_new(0, 0, 0));
 	kd = fmax(v_dot(scene->rec.normal, light_dir), 0.0);
 	diffuse = v_mul_d(light->color, kd);
-	return (diffuse);
+	brightness = light->bright_ratio * LUMEN;
+	return (v_mul_d(diffuse, brightness));
+}
+
+bool	in_shadow(t_object *obj, t_ray light_ray, double light_len)
+{
+	t_hit_record	rec;
+
+	rec.tmin = 0;
+	rec.tmax = light_len;
+	if (hit(obj, &light_ray, &rec))
+		return (true);
+	return (false);
 }

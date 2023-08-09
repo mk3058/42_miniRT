@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:26:25 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/07 18:33:00 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/09 12:39:18 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ bool		hit_sphere(const t_object ob, const t_ray ray, t_hit_record *rec);
 t_scene		*scene_init(void);
 t_color		phong_lighting(t_scene *scene);
 t_color		point_light_get(t_scene *scene, t_light *light);
+bool	in_shadow(t_object *obj, t_ray light_ray, double light_len);
 
 #endif
