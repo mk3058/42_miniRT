@@ -3,15 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   object_util.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonim <jonim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:54:52 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/11 17:52:01 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/11 19:30:34 by jonim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
 #include <stdio.h>
+
+double	get_focal_lenth(double fov, t_vec unitvec)
+{
+	double	focal_lenth;
+	double	rad;
+
+	rad = fov * M_PI / 180;
+	rad = rad / 2.0;
+	focal_lenth = (CANVAS_HEI / 2.0) / tan(rad);
+	return (focal_lenth);
+}
 
 t_cylinder	cylinder(char **token, t_element *element)
 {
