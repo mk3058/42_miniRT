@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonim <jonim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:29:41 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/11 17:06:57 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:49:27 by jonim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,33 @@
 # include "../coordinate/coordinate.h"
 # include "../libft/libft.h"
 # include "../error_handler/error_handler.h"
+
+typedef struct s_vec
+{
+	double	x;
+	double	y;
+	double	z;
+}	t_vec;
+
+typedef struct s_point
+{
+	double	x;
+	double	y;
+	double	z;
+}	t_point;
+
+typedef struct s_color
+{
+	double	x;
+	double	y;
+	double	z;
+}	t_color;
+
+typedef struct s_ray
+{
+	t_point	orig;
+	t_vec	dir;
+}	t_ray;
 
 typedef enum e_object_type {
 	LIGHT,
@@ -45,6 +72,7 @@ typedef struct s_camera {
 	t_point	origin;
 	t_vec	d_vec;
 	double	fov;
+	double	focal_lenth;
 }	t_camera;
 
 typedef struct s_sphere {
@@ -72,6 +100,8 @@ typedef struct s_element {
 	t_ambient	ambient;
 	t_object	*light;
 	t_object	*object;
+	t_ray		ray;
+	t_color		color;
 }	t_element;
 
 double		ft_atof(const char *str);
