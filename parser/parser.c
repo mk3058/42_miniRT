@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 13:10:13 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/11 15:38:21 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/11 17:59:10 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,17 @@ void	parse_line(char *str, t_element *element)
 	token = ft_split(str, " ,");
 	if (token[i])
 	{
-		if (ft_strncmp(token[i], "A", 3))
+		if (ft_strncmp(token[i], "A", 3) == 0)
 			ambient(token, element);
-		else if (ft_strncmp(token[i], "C", 3))
+		else if (ft_strncmp(token[i], "C", 3) == 0)
 			camera(token, element);
-		else if (ft_strncmp(token[i], "L", 3))
+		else if (ft_strncmp(token[i], "L", 3) == 0)
 			light(token, element);
-		else if (ft_strncmp(token[i], "sp", 3))
+		else if (ft_strncmp(token[i], "sp", 3) == 0)
 			sphere(token, element);
-		else if (ft_strncmp(token[i], "pl", 3))
+		else if (ft_strncmp(token[i], "pl", 3) == 0)
 			plane(token, element);
-		else if (ft_strncmp(token[i], "cy", 3))
+		else if (ft_strncmp(token[i], "cy", 3) == 0)
 			cylinder(token, element);
 		else
 			print_exit("%s\n", "Object identifier is invalid");
@@ -73,4 +73,3 @@ int	open_file(char *target)
 		print_exit("%s\n", strerror(errno));
 	return (fd);
 }
-
