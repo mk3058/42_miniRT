@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:33:50 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/07 14:41:54 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/12 14:32:48 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,29 @@ t_image	image_new(int width, int height)
 t_camera	camera_new(t_image *image, t_point origin)
 {
 	t_camera	cam;
+	t_vec		dir = v_unit(v_new(0, -3, 1));
+	t_vec		tmp = v_new(0, 1, 0);
+	double		dot = v_dot(dir, tmp);
 
+	if (fabs(dot) > 0.99)
+	{
+		tmp = v_new(-1, 0, 0);
+		fprintf(stderr, "====");
+	}
+	t_vec	r = v_unit(v_crs(dir, tmp));
+	t_vec	u = v_unit(v_crs(r, dir));
+	fprintf(stderr, "==== %lf %lf %lf\n", r.x, r.y, r.z);
+	fprintf(stderr, "====%lf %lf %lf\n", u.x, u.y, u.z);
 	cam.viewport_h = 2.0;
 	cam.viewport_w = cam.viewport_h * image->aspect_ratio;
 	cam.focal_len = 1.0;
 	cam.origin = origin;
-	cam.horizontal = v_new(cam.viewport_w, 0, 0);
-	cam.vertical = v_new(0, cam.viewport_h, 0);
+	cam.horizontal = v_mul_d(r, cam.viewport_w);
+	cam.vertical = v_mul_d(u, cam.viewport_h);
 	cam.left_bottom = v_sub(v_sub(v_sub(cam.origin, \
 						v_div(cam.horizontal, 2.0)), v_div(cam.vertical, 2.0)), \
-						v_new(0, 0, cam.focal_len));
+						v_mul_d(v_new(fabs(dir.x), fabs(dir.y), fabs(dir.z)), cam.focal_len));
+	fprintf(stderr, "==== %lf %lf %lf\n", cam.left_bottom.x, cam.left_bottom.y, cam.left_bottom.z);
 	return (cam);
 }
 

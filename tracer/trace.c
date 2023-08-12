@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 12:32:58 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/09 13:15:33 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/12 14:20:36 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ t_scene	*scene_init(void)
 
 	scene = malloc(sizeof(t_scene));
 	scene->image = image_new(400, 300);
-	scene->camera = camera_new(&scene->image, point_new(0, 0, 0));
+	scene->camera = camera_new(&scene->image, point_new(0, 10, -10));
 	world = object_new(SP, sphere_new(point_new(-2, 0, -5), 2), color_new(0.5, 0, 0));
 	oadd(&world, object_new(SP, sphere_new(point_new(0, -1000, 0), 995), color_new(1, 1, 1)));
 	oadd(&world, object_new(SP, sphere_new(point_new(2, 0, -5), 2), color_new(0, 0.5, 0)));
