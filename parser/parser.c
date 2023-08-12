@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 13:10:13 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/11 18:15:15 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/12 15:24:23 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_element	parse_rt(char *target)
 	while (str)
 	{
 		parse_line(str, &element);
+		free(str);
 		str = get_next_line(fd);
 	}
 	return (element);
@@ -64,9 +65,11 @@ int	open_file(char *target)
 {
 	int		fd;
 	char	*type;
+	int		type_len;
 
 	type = ft_strrchr(target, '.');
-	if (!type || ft_strncmp(type, ".rt", 3) != 0)
+	type_len = ft_strlen(type);
+	if (!type || type_len != 3 || ft_strncmp(type, ".rt", 3) != 0)
 		print_exit("%s\n", "The file must have a .rt type");
 	fd = open(target, O_RDONLY);
 	if (fd < 0)
