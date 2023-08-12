@@ -1,9 +1,10 @@
 name: Compile Check
 
 on:
-  push:
+  pull_request:
     branches:
       - master
+
 
 jobs:
   build:
