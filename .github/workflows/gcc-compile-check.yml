@@ -1,0 +1,21 @@
+name: Compile Check
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: sudo apt-get install -y gcc
+
+    - name: Compile
+      run: gcc $(find . -path './minilibx_opengl_20191021' -prune -o -name '*.c' ! -name '(for test) print_element.c' -print) -o miniRT
+      #run: make
