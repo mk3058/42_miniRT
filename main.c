@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 		{
 			//element.ray = ray_tracing();
 			//element.color = ray_get_color();
-			my_mlx_pixel_put(&mlx, i, j, element.color);
+			//my_mlx_pixel_put(&mlx, i, j, element.color);
 			j++;
 		}
 		i++;
