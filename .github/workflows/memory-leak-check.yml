@@ -7,16 +7,29 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
     - name: Install dependencies
-      run: sudo apt-get install -y gcc valgrind
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gcc valgrind
+     
+    - name: Install Objective-C compiler
+      run: sudo apt-get install -y gobjc
 
-    - name: Compile all .c files except those in minilibx and specific file
+    - name: Install OpenGL
+      run: sudo apt-get install -y libgl1-mesa-dev mesa-common-dev
+   
+    - name: Create symbolic link for OpenGL
+      run: |
+        sudo mkdir -p /usr/include/OpenGL
+        sudo ln -s /usr/include/GLES3/gl3.h /usr/include/OpenGL/gl3.h
+
+    - name: Compile all .c files
       run: make
 
     - name: Check for memory leaks
