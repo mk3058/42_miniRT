@@ -18,5 +18,4 @@ jobs:
       run: sudo apt-get install -y gcc
 
     - name: Compile
-      run: gcc $(find . -path './minilibx_opengl_20191021' -prune -o -name '*.c' ! -name '(for test) print_element.c' -print) -o miniRT
-      #run: make
+      run: make
