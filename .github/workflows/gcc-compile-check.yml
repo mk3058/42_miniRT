@@ -5,7 +5,6 @@ on:
     branches:
       - master
 
-
 jobs:
   build:
     runs-on: macos-latest
@@ -16,19 +15,22 @@ jobs:
 
     - name: Install dependencies
       run: |
-        sudo apt-get update
-        sudo apt-get install -y gcc
-    
+        brew install gcc
+
     - name: Install Objective-C compiler
-      run: sudo apt-get install -y gobjc
+      run: brew install llvm
 
     - name: Install OpenGL
-      run: sudo apt-get install -y libgl1-mesa-dev mesa-common-dev
-   
+      run: brew install mesa
+
+    - name: Find OpenGL header file
+      run: find /usr -name gl3.h
+
     - name: Create symbolic link for OpenGL
       run: |
-        sudo mkdir -p /usr/include/OpenGL
-        sudo ln -s /usr/include/GLES3/gl3.h /usr/include/OpenGL/gl3.h
+        GL3_PATH=$(find /usr -name gl3.h)
+        sudo mkdir -p /usr/local/include/OpenGL
+        sudo ln -s $GL3_PATH /usr/local/include/OpenGL/gl3.h
 
     - name: Compile
       run: make
