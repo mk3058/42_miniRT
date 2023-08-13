@@ -19,10 +19,11 @@ jobs:
     - name: Install OpenGL
       run: brew install mesa
 
-    - name: Create symbolic link for OpenGL
+    - name: Copy OpenGL directory
       run: |
         sudo mkdir -p /usr/local/include/OpenGL
-        sudo ln -s /usr/local/Cellar/mesa/22.3.6_1/include/GLES3/gl3.h /usr/local/include/OpenGL/gl3.h
+        sudo cp -R /usr/local/Cellar/mesa/22.3.6_1/include/GLES3 /usr/local/include/OpenGL
+
 
     - name: Compile all .c files
       run: make
