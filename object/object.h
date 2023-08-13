@@ -3,40 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonim <jonim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:29:41 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/11 18:49:27 by jonim            ###   ########.fr       */
+/*   Updated: 2023/08/13 14:01:30 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECT_H
 # define OBJECT_H
 
-# include "../coordinate/coordinate.h"
-# include "../libft/libft.h"
-# include "../error_handler/error_handler.h"
-
-typedef struct s_vec
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_vec;
-
-typedef struct s_point
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_point;
-
-typedef struct s_color
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_color;
+# include "coordinate.h"
+# include "libft.h"
+# include "error_handler.h"
 
 typedef struct s_ray
 {

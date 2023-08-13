@@ -5,6 +5,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
+# include "coordinate.h"
 
 # define CANVAS_HEI 1920
 # define CANVAS_WID 1020
@@ -19,5 +20,9 @@ typedef struct s_data
 	int		len;
 	int		endian;
 }	t_data;
+
+void	minirt_mlx_init(t_data *mlx);
+void	my_mlx_pixel_put(t_data *mlx, int x, int y, t_color color);
+int		exit_win(t_data *mlx);
 
 #endif

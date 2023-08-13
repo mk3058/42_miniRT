@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   object_util.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonim <jonim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:54:52 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/11 19:30:34 by jonim            ###   ########.fr       */
+/*   Updated: 2023/08/13 14:02:01 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
-#include <stdio.h>
+#include "minirt.h"
 
 double	get_focal_lenth(double fov, t_vec unitvec)
 {

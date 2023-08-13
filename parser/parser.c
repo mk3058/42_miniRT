@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 13:10:13 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/12 15:24:23 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/13 13:54:59 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,9 @@ int	open_file(char *target)
 {
 	int		fd;
 	char	*type;
-	int		type_len;
-
+	
 	type = ft_strrchr(target, '.');
-	type_len = ft_strlen(type);
-	if (!type || type_len != 3 || ft_strncmp(type, ".rt", 3) != 0)
+	if (!type || ft_strlen(type) != 3 || ft_strncmp(type, ".rt", 3) != 0)
 		print_exit("%s\n", "The file must have a .rt type");
 	fd = open(target, O_RDONLY);
 	if (fd < 0)
