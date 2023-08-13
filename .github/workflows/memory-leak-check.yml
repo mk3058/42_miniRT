@@ -15,19 +15,18 @@ jobs:
 
     - name: Install dependencies
       run: |
-        sudo apt-get update
-        sudo apt-get install -y gcc valgrind
-     
+        brew install valgrind
+
     - name: Install Objective-C compiler
-      run: sudo apt-get install -y gobjc
+      run: brew install llvm
 
     - name: Install OpenGL
-      run: sudo apt-get install -y libgl1-mesa-dev mesa-common-dev
-   
+      run: brew install mesa
+
     - name: Create symbolic link for OpenGL
       run: |
-        sudo mkdir -p /usr/include/OpenGL
-        sudo ln -s /usr/include/GLES3/gl3.h /usr/include/OpenGL/gl3.h
+        sudo mkdir -p /usr/local/include/OpenGL
+        sudo ln -s /usr/local/Cellar/mesa/22.3.6_1/include/GLES3/gl3.h /usr/local/include/OpenGL/gl3.h
 
     - name: Compile all .c files
       run: make

@@ -13,24 +13,16 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: |
-        brew install gcc
-
     - name: Install Objective-C compiler
       run: brew install llvm
 
     - name: Install OpenGL
       run: brew install mesa
 
-    - name: Find OpenGL header file
-      run: find /usr -name gl3.h
-
     - name: Create symbolic link for OpenGL
       run: |
-        GL3_PATH=$(find /usr -name gl3.h)
         sudo mkdir -p /usr/local/include/OpenGL
-        sudo ln -s $GL3_PATH /usr/local/include/OpenGL/gl3.h
+        sudo ln -s /usr/local/Cellar/mesa/22.3.6_1/include/GLES3/gl3.h /usr/local/include/OpenGL/gl3.h
 
-    - name: Compile
+    - name: Compile all .c files
       run: make
