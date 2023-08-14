@@ -68,12 +68,16 @@ void print_objects(t_object *object) {
 }
 
 void print_element(t_element element) {
-    printf("Camera:\n");
-    printf("\tOrigin: ");
-    print_cartesian(element.camera.origin);
-    printf("\tDirection Vector: ");
-    print_cartesian(element.camera.d_vec);
-    printf("\tFOV: %lf\n\n", element.camera.fov);
+    printf("Camera details:\n");
+	printf("Origin:          (x: %.2f, y: %.2f, z: %.2f)\n", element.camera.origin.x, element.camera.origin.y, element.camera.origin.z);
+	printf("Direction Vector:(x: %.2f, y: %.2f, z: %.2f)\n", element.camera.d_vec.x, element.camera.d_vec.y, element.camera.d_vec.z);
+	printf("FOV:             %.2f\n", element.camera.fov);
+	printf("Viewport Height: %.2f\n", element.camera.viewport_height);
+	printf("Viewport Width:  %.2f\n", element.camera.viewport_width);
+	printf("Horizontal:      (x: %.2f, y: %.2f, z: %.2f)\n", element.camera.horizontal.x, element.camera.horizontal.y, element.camera.horizontal.z);
+	printf("Vertical:        (x: %.2f, y: %.2f, z: %.2f)\n", element.camera.vertical.x, element.camera.vertical.y, element.camera.vertical.z);
+	printf("Focal Length:    %.2f\n", element.camera.focal_length);
+	printf("Top Left:        (x: %.2f, y: %.2f, z: %.2f)\n", element.camera.top_left.x, element.camera.top_left.y, element.camera.top_left.z);
 
     printf("Ambient:\n");
     printf("\tBrightness: %lf\n", element.ambient.brightness);

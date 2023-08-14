@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   object_util.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:54:52 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/13 14:02:01 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/08/14 13:18:39 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
-#include "minirt.h"
-
-double	get_focal_lenth(double fov, t_vec unitvec)
-{
-	double	focal_lenth;
-	double	rad;
-
-	rad = fov * M_PI / 180;
-	rad = rad / 2.0;
-	focal_lenth = (CANVAS_HEI / 2.0) / tan(rad);
-	return (focal_lenth);
-}
 
 t_cylinder	cylinder(char **token, t_element *element)
 {
@@ -37,7 +25,8 @@ t_cylinder	cylinder(char **token, t_element *element)
 		print_exit("'%s': Invalid number of arguments.\n", token[0]);
 	c = malloc(sizeof(t_cylinder));
 	c->center = point(ft_atof(token[1]), ft_atof(token[2]), ft_atof(token[3]));
-	c->axis = vec(ft_atof(token[4]), ft_atof(token[5]), ft_atof(token[6]));
+	c->axis = vunit(vec(ft_atof(token[4]), ft_atof(token[5]), \
+					ft_atof(token[6])));
 	c->radius = ft_atof(token[7]) / 2.0;
 	c->height = ft_atof(token[8]);
 	c->color = color(ft_atof(token[9]), ft_atof(token[10]), ft_atof(token[11]));

@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:39:30 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/11 18:03:28 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:30:25 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ t_camera	camera(char **token, t_element *element)
 	if (i != 8)
 		print_exit("'%s': Invalid number of arguments.\n", token[0]);
 	c.origin = point(ft_atof(token[1]), ft_atof(token[2]), ft_atof(token[3]));
-	c.d_vec = point(ft_atof(token[4]), ft_atof(token[5]), ft_atof(token[6]));
+	c.d_vec = vunit(vec(ft_atof(token[4]), ft_atof(token[5]), \
+					ft_atof(token[6])));
 	c.fov = ft_atof(token[7]);
+	set_viewport(&c);
 	element->camera = c;
 	return (c);
 }
@@ -109,7 +111,8 @@ t_plane	plane(char **token, t_element *element)
 		print_exit("'%s': Invalid number of arguments.\n", token[0]);
 	c = malloc(sizeof(t_plane));
 	c->origin = point(ft_atof(token[1]), ft_atof(token[2]), ft_atof(token[3]));
-	c->n_vec = vec(ft_atof(token[4]), ft_atof(token[5]), ft_atof(token[6]));
+	c->n_vec = vunit(vec(ft_atof(token[4]), ft_atof(token[5]), \
+					ft_atof(token[6])));
 	c->color = color(ft_atof(token[7]), ft_atof(token[8]), ft_atof(token[9]));
 	o = ft_calloc(1, sizeof(t_object));
 	o->obj = c;

@@ -8,7 +8,7 @@
 # include "coordinate.h"
 
 # define CANVAS_HEI 1920
-# define CANVAS_WID 1020
+# define CANVAS_WID 1080
 
 typedef struct s_data
 {
