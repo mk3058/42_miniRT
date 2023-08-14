@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:24:06 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/11 17:56:28 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:14:02 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_vec	vunit(const t_vec a)
 
 	len = vlen(a);
 	if (len == 0)
-		print_exit("%s\n", "Divisor Cannot Be");
+		print_exit("%s\n", "vunit: Divisor Cannot Be `0`");
 	return (vec(a.x / len, a.y / len, a.z / len));
 }
 

@@ -1,6 +1,7 @@
 #include "minirt.h"
 #include "object.h"
 #include "parser.h"
+#include "trace.h"
 
 int	main(int argc, char **argv)
 {
@@ -19,7 +20,7 @@ int	main(int argc, char **argv)
 		j = 1;
 		while (j <= CANVAS_WID)
 		{
-			//element.ray = ray_tracing();
+			//element.ray = ray_tracing(element);
 			//element.color = ray_get_color();
 			//my_mlx_pixel_put(&mlx, i, j, element.color);
 			j++;

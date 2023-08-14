@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:29:41 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/13 14:01:30 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/08/14 12:50:52 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,12 @@ typedef struct s_camera {
 	t_point	origin;
 	t_vec	d_vec;
 	double	fov;
-	double	focal_lenth;
+	double	viewport_height;
+	double	viewport_width;
+	t_vec	horizontal;
+	t_vec	vertical;
+	double	focal_length;
+	t_point	top_left;
 }	t_camera;
 
 typedef struct s_sphere {
@@ -93,5 +98,6 @@ t_camera	camera(char **token, t_element *element);
 t_sphere	sphere(char **token, t_element *element);
 t_plane		plane(char **token, t_element *element);
 t_cylinder	cylinder(char **token, t_element *element);
+void		set_viewport(t_camera *camera);
 
 #endif
