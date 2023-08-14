@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   viewport_util.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:12:29 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/14 13:30:49 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/15 08:53:05 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void	set_viewport(t_camera *camera)
 	camera->horizontal = vunit(vcrs(camera->d_vec, approx_top));
 	camera->vertical = vunit(vcrs(camera->horizontal, camera->d_vec));
 	camera->focal_length = get_focal_length(camera);
-	viewport_center = vmul_(camera->d_vec, camera->focal_length);
+	viewport_center = vmul_(vadd(camera->d_vec, camera->origin), \
+							camera->focal_length);
 	camera->top_left = vadd(vadd(viewport_center, \
 					vmul_(camera->vertical, camera->viewport_height / 2)), \
 					vmul_(camera->horizontal, -(camera->viewport_width / 2)));
