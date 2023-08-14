@@ -5,18 +5,25 @@ on:
     branches:
       - master
 
-
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: sudo apt-get install -y gcc
+    - name: Install Objective-C compiler
+      run: brew install llvm
 
-    - name: Compile
-      run: gcc $(find . -path './minilibx_opengl_20191021' -prune -o -name '*.c' ! -name '(for test) print_element.c' -print) -o miniRT
-      #run: make
+    - name: Install OpenGL
+      run: brew install mesa
+
+    - name: Copy OpenGL directory
+      run: |
+        sudo mkdir -p /usr/local/include/OpenGL
+        sudo cp -R /usr/local/Cellar/mesa/22.3.6_1/include/GLES3 /usr/local/include/OpenGL
+
+
+    - name: Compile all .c files
+      run: make

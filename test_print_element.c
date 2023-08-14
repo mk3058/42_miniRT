@@ -87,10 +87,3 @@ void print_element(t_element element) {
     printf("\n[Objects]\n");
     print_objects(element.object);
 }
-
-
-// int main(int argc, char **argv) {
-// 	t_element element = parse_rt(argv[1]);
-
-// 	print_element(element);
-// }

@@ -9,6 +9,8 @@ int	main(int argc, char **argv)
 	int			i;
 	int			j;
 
+	if (argc != 2)
+		print_exit("%s\n", "Invalid number of arguments");
 	element = parse_rt(argv[1]);
 	minirt_mlx_init(&mlx);
 	i = 1;
@@ -17,9 +19,9 @@ int	main(int argc, char **argv)
 		j = 1;
 		while (j <= CANVAS_WID)
 		{
-			element.ray = ray_tracing();
-			element.color = ray_get_color();
-			my_mlx_pixel_put(&mlx, i, j, element.color);
+			//element.ray = ray_tracing();
+			//element.color = ray_get_color();
+			//my_mlx_pixel_put(&mlx, i, j, element.color);
 			j++;
 		}
 		i++;

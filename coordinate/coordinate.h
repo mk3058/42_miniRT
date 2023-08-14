@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   coordinate.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:12:47 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/11 17:10:06 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/13 13:48:37 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COORDINATE_H
 # define COORDINATE_H
 
-# include "../error_handler/error_handler.h"
+# include "error_handler.h"
 # include <math.h>
 
 typedef struct s_cartesian {
