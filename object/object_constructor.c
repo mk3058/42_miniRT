@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:39:30 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/15 15:14:04 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/15 18:17:11 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_ambient	ambient(char **token, t_element *element)
 	int			i;
 
 	i = 0;
-	if (element->ambient.brightness > 0.000001)
+	if (element->ambient.brightness > EPSILON)
 		print_exit("'%s': This object cannot be used more than once.", \
 		token[0]);
 	while (token[i] != NULL)
@@ -59,7 +59,7 @@ t_camera	camera(char **token, t_element *element)
 	t_camera	c;
 	int			i;
 
-	if (element->camera.fov > 0.000001)
+	if (element->camera.fov > EPSILON)
 		print_exit("'%s': This object cannot be used more than once.", \
 		token[0]);
 	i = 0;

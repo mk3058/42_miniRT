@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:29:41 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/15 17:15:44 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/15 18:08:05 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_cylinder {
 
 typedef struct s_record {
 	t_point	intersection;
+	t_vec	n_vec;
 	double	distance;
 	double	dis_max;
 	double	dis_min;

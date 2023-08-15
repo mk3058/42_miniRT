@@ -3,6 +3,8 @@
 #include "parser.h"
 #include "trace.h"
 
+void print_element(t_element element);
+
 int	main(int argc, char **argv)
 {
 	t_data		mlx;
@@ -13,6 +15,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		print_exit("%s\n", "Invalid number of arguments");
 	element = parse_rt(argv[1]);
+	print_element(element);
 	minirt_mlx_init(&mlx);
 	height = 0;
 	while (height < CANVAS_HEI)
