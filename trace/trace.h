@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:48:43 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/15 16:18:50 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/15 19:02:12 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,9 @@
 
 t_ray	ray_tracing(const t_element element, int h, int v);
 t_color	ray_get_color(t_element *element);
+bool	hit(t_object *object, t_ray *ray, t_record *rec);
+t_color	phong_lighting(t_element *element);
+bool	hit_sphere(t_sphere *sp, t_ray *ray, t_record *record);
+bool	hit_plane(t_plane *pl, t_ray *ray, t_record *record);
 
 #endif

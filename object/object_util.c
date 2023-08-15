@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:54:52 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/15 17:15:34 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/15 18:17:11 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_record	record(void)
 
 	ft_memset(&new, 0, sizeof(t_record));
 	new.dis_max = INFINITY;
-	new.dis_min = 0.000001;
+	new.dis_min = EPSILON;
 	return (new);
 }
 
