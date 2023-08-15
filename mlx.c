@@ -13,9 +13,10 @@ void	my_mlx_pixel_put(t_data *mlx, int x, int y, t_color color)
 {
 	char	*dst;
 
-	dst = mlx->addr + (x * mlx->len + y * (mlx->bbp / 8));
-	*(unsigned int *)dst = (255 * color.x * 65536) + (255 * color.y * 256) \
-							+ 255 * color.z;
+	color = vmul_(color, 255);
+	dst = mlx->addr + (y * mlx->len + x * (mlx->bbp / 8));
+	*(unsigned int *)dst = (0 << 24) + ((int)color.x << 16) + \
+	((int)color.y << 8) + (int)color.z;
 }
 
 int	exit_win(t_data *mlx)

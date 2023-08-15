@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   viewport_util.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:12:29 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/15 08:53:05 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/08/15 16:24:11 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,3 @@ void	set_viewport(t_camera *camera)
 					vmul_(camera->vertical, camera->viewport_height / 2)), \
 					vmul_(camera->horizontal, -(camera->viewport_width / 2)));
 }
-
-
