@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:54:52 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/14 13:18:39 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/15 17:15:34 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@ t_cylinder	cylinder(char **token, t_element *element)
 	o->type = CYLINDER;
 	o_add(&element->object, o);
 	return (*c);
+}
+
+t_record	record(void)
+{
+	t_record	new;
+
+	ft_memset(&new, 0, sizeof(t_record));
+	new.dis_max = INFINITY;
+	new.dis_min = 0.000001;
+	return (new);
 }
 
 void	o_add(t_object **head, t_object *new)
