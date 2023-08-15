@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:12:47 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/13 13:48:37 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/08/15 10:55:31 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "error_handler.h"
 # include <math.h>
+# include <stdbool.h>
 
 typedef struct s_cartesian {
 	double	x;
