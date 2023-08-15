@@ -4,8 +4,8 @@
 void	minirt_mlx_init(t_data *mlx)
 {
 	mlx->mlx = mlx_init();
-	mlx->mlx_win = mlx_new_window(mlx->mlx, CANVAS_HEI, CANVAS_WID, "miniRT");
-	mlx->img = mlx_new_image(mlx->mlx, CANVAS_HEI, CANVAS_WID);
+	mlx->mlx_win = mlx_new_window(mlx->mlx, CANVAS_WID, CANVAS_HEI, "miniRT");
+	mlx->img = mlx_new_image(mlx->mlx, CANVAS_WID, CANVAS_HEI);
 	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bbp, &mlx->len, &mlx->endian);
 }
 
@@ -13,8 +13,9 @@ void	my_mlx_pixel_put(t_data *mlx, int x, int y, t_color color)
 {
 	char	*dst;
 
-	dst = mlx->addr + (y * mlx->len + x * (mlx->bbp / 8));
-	*(unsigned int *)dst = (color.x * 65536) + (color.y * 256) + color.z;
+	dst = mlx->addr + (x * mlx->len + y * (mlx->bbp / 8));
+	*(unsigned int *)dst = (255 * color.x * 65536) + (255 * color.y * 256) \
+							+ 255 * color.z;
 }
 
 int	exit_win(t_data *mlx)
