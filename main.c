@@ -7,25 +7,25 @@ int	main(int argc, char **argv)
 {
 	t_data		mlx;
 	t_element	element;
-	int			i;
-	int			j;
+	int			height;
+	int			width;
 
 	if (argc != 2)
 		print_exit("%s\n", "Invalid number of arguments");
 	element = parse_rt(argv[1]);
 	minirt_mlx_init(&mlx);
-	i = 0;
-	while (i < CANVAS_HEI)
+	height = 0;
+	while (height < CANVAS_HEI)
 	{
-		j = 0;
-		while (j < CANVAS_WID)
+		width = 0;
+		while (width < CANVAS_WID)
 		{
-			element.ray = ray_tracing(element, i, j);
-			//element.color = ray_get_color();
-			//my_mlx_pixel_put(&mlx, i, j, element.color);
-			j++;
+			element.ray = ray_tracing(element, width, height);
+			element.color = ray_get_color(&element);
+			my_mlx_pixel_put(&mlx, width, height, element.color);
+			width++;
 		}
-		i++;
+		height++;
 	}
 	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img, 0, 0);
 	mlx_hook(mlx.mlx_win, 17, 0, &exit_win, &mlx);
