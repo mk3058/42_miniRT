@@ -2,7 +2,8 @@
 # Compile option
 NAME := miniRT
 CC := gcc
-CFLAGS := -g -fsanitize=address
+CFLAGS := -MMD -g -fsanitize=address 
+OBJ_DIR := make_object
 
 ##### Exclude Directory Settings #####
 EXCLUDE_SRCS_PATHS := ./mlx ./libft
@@ -15,15 +16,15 @@ MLX_LIB := -L./mlx -lmlx -framework OpenGL -framework AppKit
 LIBFT_LIB := -L libft -lft
 ################################################################################
 
-# excluded sources and headers
+# excluded sources and headers, dependencies
 EXCLUDE_SRCS := $(addprefix ! -path ", $(addsuffix /*.c", $(EXCLUDE_SRCS_PATHS)))
 EXCLUDE_HDRS := $(addprefix ! -path ", $(addsuffix /*.h", $(EXCLUDE_HDRS_PATHS)))
-# find all sources and headers
 SRCS := $(shell find . -name "*.c" $(EXCLUDE_SRCS) ! -path "./libft/*")
 HDRS := $(shell find . -name "*.h" $(EXCLUDE_HDRS))
 INCLUDES := $(dir $(sort $(HDRS)))
 CFLAGS += $(addprefix -I, $(INCLUDES))
-OBJS := $(SRCS:.c=.o)
+OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
+DEP := $(OBJS:.o=.d)
 
 # Progress bar
 TOTAL_FILES := $(words $(SRCS))
@@ -32,7 +33,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(MLX) $(OBJS)
 	@printf "\033[0;32mLinking... "
-	@$(CC) $(CFLAGS) $(LIBFT_LIB) $(MLX_LIB)  $^ -o $@
+	@$(CC) $(CFLAGS) $(LIBFT_LIB) $(MLX_LIB) $^ -o $@
 	@echo "Done!\033[0m"
 
 $(LIBFT):
@@ -41,7 +42,8 @@ $(LIBFT):
 $(MLX):
 	@make -C mlx
 
-%.o: %.c
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
 	@CURRENT_FILES=$$(ls $(OBJS) 2> /dev/null | wc -l | awk '{print $$1 + 1}'); \
 	printf "\033[0;32mCompiling [$$CURRENT_FILES/$(TOTAL_FILES)]\033[0m $<\n"; \
 	$(CC) $(CFLAGS) -o $@ -c $<
@@ -49,12 +51,14 @@ $(MLX):
 clean:
 	@make clean -C libft
 	@make clean -C mlx
-	@rm -f $(OBJS)
+	@rm -rf $(OBJ_DIR)
 
 fclean: clean
 	@make fclean -C libft
 	@rm -f $(NAME)
 
 re: fclean all
+
+-include $(DEP)
 
 .PHONY: all clean fclean re
