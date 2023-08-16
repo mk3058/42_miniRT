@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:12:29 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/15 19:26:46 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/16 14:33:11 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,11 @@ void	set_viewport(t_camera *camera)
 {
 	t_vec	approx_top;
 	t_vec	viewport_center;
+	double	ratio;
 
-	camera->viewport_height = CANVAS_HEI;
-	camera->viewport_width = CANVAS_WID;
+	ratio = (double)CANVAS_WID / (double)CANVAS_HEI;
+	camera->viewport_height = 2.0;
+	camera->viewport_width = camera->viewport_height * ratio;
 	approx_top = get_approx_top(camera);
 	camera->horizontal = vunit(vcrs(camera->d_vec, approx_top));
 	camera->vertical = vunit(vcrs(camera->horizontal, camera->d_vec));
@@ -65,6 +67,6 @@ void	set_viewport(t_camera *camera)
 	viewport_center = vmul_(vadd(camera->d_vec, camera->origin), \
 							camera->focal_length);
 	camera->top_left = vadd(vadd(viewport_center, \
-					vmul_(camera->vertical, camera->viewport_height / 2)), \
-					vmul_(camera->horizontal, -(camera->viewport_width / 2)));
+					vmul_(camera->vertical, camera->viewport_height / 2.0)), \
+					vmul_(camera->horizontal, -(camera->viewport_width / 2.0)));
 }

@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:49:03 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/15 19:16:35 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/16 14:51:42 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 #include "object.h"
 #include "coordinate.h"
 
-t_ray	ray_tracing(const t_element element, int width, int height)
+t_ray	ray_tracing(const t_element element, double width, double height)
 {
 	t_ray	ray;
 	t_point	t;
 
 	ray.orig = element.camera.origin;
-	t = vadd(vadd(element.camera.top_left, \
-				vmul_(element.camera.horizontal, width)),
-				vmul_(element.camera.vertical, -height));
-	printf("w: %d h: %d    %lf %lf %lf\n", width, height, t.x, t.y, t.z);
+	t = vadd(vadd(vsub(element.camera.top_left, ray.orig), \
+	vmul_(element.camera.horizontal, element.camera.viewport_width * width)), \
+	vmul_(element.camera.vertical, element.camera.viewport_height * (-height)));
 	ray.dir = vunit(t);
 	return (ray);
 }
