@@ -44,22 +44,38 @@ t_color	phong_lighting(t_element *element)
 	return (vmin(vmul(light_color, element->record.color), color(1, 1, 1)));
 }
 
-bool	hit(t_object *object, t_ray *ray, t_record *rec)
+bool	hit_object(t_object *obj, t_ray *ray, t_record *rec)
 {
-	bool		hit;
+	bool	hit_result;
 
-	hit = false;
-	while (object)
+	hit_result = false;
+	if (obj->type == SPHERE)
+		hit_result = hit_sphere(obj->obj, ray, rec);
+	else if (obj->type == PLANE)
+		hit_result = hit_plane(obj->obj, ray, rec);
+	// else if (obj->type == CYLINDER)
+	// 	hit_result = hit_cylinder(obj->obj, ray, rec);
+	else
+		print_exit("hit_object: %s", "Invalid Object Specifier\n");
+	return (hit_result);
+}
+
+bool	hit(t_object *obj, t_ray *ray, t_record *rec)
+{
+	bool			hit_anything;
+	t_record		temp_rec;
+
+	temp_rec = *rec;
+	hit_anything = false;
+	while (obj)
 	{
-		if (object->type == SPHERE)
-			hit = hit_sphere((t_sphere *)(object->obj), ray, rec);
-		else if (object->type == PLANE)
-			hit = hit_plane((t_plane *)(object->obj), ray, rec);
-	//	else if (object->type == CYLINDER)
-	//		hit = hit_cylinder((t_cylinder *)(object->obj), ray, rec);
-		else
-			print_exit("%s\n", "Invalid Object Specifier!");
-		object = object->next;
+		if (hit_object(obj, ray, &temp_rec))
+		{
+			hit_anything = true;
+			temp_rec.dis_max = temp_rec.distance;
+			*rec = temp_rec;
+		}
+		obj = obj->next;
 	}
-	return (hit);
+	return (hit_anything);
 }

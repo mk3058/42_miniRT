@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:49:03 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/16 14:51:42 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/16 15:09:47 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,17 +95,13 @@ bool	hit_sphere(t_sphere *sp, t_ray *ray, t_record *rec)
 
 t_color	ray_get_color(t_element *element)
 {
-	t_record	tmp_rec;
-
-	tmp_rec = record();
 	element->record = record();
-	if (hit(element->object, &element->ray, &tmp_rec))
+	if (hit(element->object, &element->ray, &element->record))
 	{
-		element->record = tmp_rec;
 		return (phong_lighting(element));
 	}
 	else
-		return (color(0, 0, 0));
+		return (color(0, 0.3, 0.3));
 }
 
 
