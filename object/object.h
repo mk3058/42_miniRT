@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:29:41 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/15 18:08:05 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/17 00:01:47 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ t_plane		plane(char **token, t_element *element);
 t_cylinder	cylinder(char **token, t_element *element);
 t_record	record(void);
 void		set_viewport(t_camera *camera);
+t_point		ray_at(t_ray ray, double distance);
 
 #endif

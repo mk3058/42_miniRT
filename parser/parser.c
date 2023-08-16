@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 13:10:13 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/13 13:54:59 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/08/17 02:16:27 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	open_file(char *target)
 {
 	int		fd;
 	char	*type;
-	
+
 	type = ft_strrchr(target, '.');
 	if (!type || ft_strlen(type) != 3 || ft_strncmp(type, ".rt", 3) != 0)
 		print_exit("%s\n", "The file must have a .rt type");
