@@ -3,8 +3,6 @@
 #include "parser.h"
 #include "trace.h"
 
-void print_element(t_element element);
-
 int	main(int argc, char **argv)
 {
 	t_data		mlx;
@@ -15,7 +13,6 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		print_exit("%s\n", "Invalid number of arguments");
 	element = parse_rt(argv[1]);
-	print_element(element);
 	minirt_mlx_init(&mlx);
 	height = 0;
 	while (height < CANVAS_HEI)
@@ -23,7 +20,8 @@ int	main(int argc, char **argv)
 		width = 0;
 		while (width < CANVAS_WID)
 		{
-			element.ray = ray_tracing(element, width, height);
+			element.ray = ray_tracing(element, \
+				width / (CANVAS_WID - 1.0), height / (CANVAS_HEI - 1.0));
 			element.color = ray_get_color(&element);
 			my_mlx_pixel_put(&mlx, width, height, element.color);
 			width++;
