@@ -55,22 +55,26 @@ bool	hit(t_object *obj, t_ray *ray, t_record *rec)
 {
 	bool			hit_something;
 	bool			flag;
+	t_record		tmp;
 
 	hit_something = false;
+	tmp = *rec;
 	while (obj)
 	{
 		flag = false;
 		if (obj->type == SPHERE)
-			hit_something += hit_sphere(obj->obj, ray, rec);
+			flag = hit_sphere(obj->obj, ray, &tmp);
 		else if (obj->type == PLANE)
-			hit_something += hit_plane(obj->obj, ray, rec);
+			flag = hit_plane(obj->obj, ray, &tmp);
 		else if (obj->type == CYLINDER)
-			; //hit_something += hit_cylinder(obj->obj, ray, rec);
-		else
-			print_exit("hit: %s", "Invalid Object Specifier\n");
+			; //flag = hit_cylinder(obj->obj, ray, &tmp);
+		if (flag)
+		{
+			hit_something = true;
+			tmp.dis_max = tmp.distance;
+			*rec = tmp;
+		}
 		obj = obj->next;
 	}
-	if (hit_something)
-		rec->dis_max = rec->distance;
 	return (hit_something);
 }
