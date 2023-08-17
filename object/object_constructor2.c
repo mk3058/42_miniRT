@@ -17,7 +17,8 @@ t_cylinder	cylinder(char **token, t_element *element)
 					ft_atof(token[6])));
 	c->radius = ft_atof(token[7]) / 2.0;
 	c->height = ft_atof(token[8]);
-	c->color = color(ft_atof(token[9]), ft_atof(token[10]), ft_atof(token[11]));
+	c->color = vdiv(color(ft_atof(token[9]), ft_atof(token[10]), \
+							ft_atof(token[11])), 255);
 	o = ft_calloc(1, sizeof(t_object));
 	o->obj = c;
 	o->type = CYLINDER;
