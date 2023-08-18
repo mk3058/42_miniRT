@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 13:10:13 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/17 02:16:27 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/08/18 15:40:56 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_element	parse_rt(char *target)
 		free(str);
 		str = get_next_line(fd);
 	}
+	if (vlen(element.camera.d_vec) < EPSILON)
+		print_exit("element: %s\n", "Camera must be present!");
 	return (element);
 }
 
