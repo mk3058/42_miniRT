@@ -3,39 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   object_util.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:54:52 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/14 13:18:39 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/17 00:01:28 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
-
-t_cylinder	cylinder(char **token, t_element *element)
-{
-	t_cylinder	*c;
-	t_object	*o;
-	int			i;
-
-	i = 0;
-	while (token[i] != NULL)
-		i++;
-	if (i != 12)
-		print_exit("'%s': Invalid number of arguments.\n", token[0]);
-	c = malloc(sizeof(t_cylinder));
-	c->center = point(ft_atof(token[1]), ft_atof(token[2]), ft_atof(token[3]));
-	c->axis = vunit(vec(ft_atof(token[4]), ft_atof(token[5]), \
-					ft_atof(token[6])));
-	c->radius = ft_atof(token[7]) / 2.0;
-	c->height = ft_atof(token[8]);
-	c->color = color(ft_atof(token[9]), ft_atof(token[10]), ft_atof(token[11]));
-	o = ft_calloc(1, sizeof(t_object));
-	o->obj = c;
-	o->type = CYLINDER;
-	o_add(&element->object, o);
-	return (*c);
-}
 
 void	o_add(t_object **head, t_object *new)
 {
@@ -63,6 +38,11 @@ t_object	*o_last(t_object *head)
 		head = head->next;
 	}
 	return (head);
+}
+
+t_point	ray_at(t_ray ray, double distance)
+{
+	return (vadd(ray.orig, vmul_(ray.dir, distance)));
 }
 
 double	ft_atof(const char *str)

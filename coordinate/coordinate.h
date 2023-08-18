@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   coordinate.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:12:47 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/15 10:55:31 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/08/15 18:17:16 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "error_handler.h"
 # include <math.h>
 # include <stdbool.h>
+
+# define EPSILON 1e-6
 
 typedef struct s_cartesian {
 	double	x;

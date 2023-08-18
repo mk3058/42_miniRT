@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object_constructor.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:39:30 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/15 15:14:04 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/17 10:11:46 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_ambient	ambient(char **token, t_element *element)
 	int			i;
 
 	i = 0;
-	if (element->ambient.brightness > 0.000001)
+	if (element->ambient.brightness > EPSILON)
 		print_exit("'%s': This object cannot be used more than once.", \
 		token[0]);
 	while (token[i] != NULL)
@@ -26,7 +26,10 @@ t_ambient	ambient(char **token, t_element *element)
 	if (i != 5)
 		print_exit("'%s': Invalid number of arguments.\n", token[0]);
 	a.brightness = ft_atof(token[1]);
-	a.color = color(ft_atof(token[2]), ft_atof(token[3]), ft_atof(token[4]));
+	if (a.brightness > 1 + EPSILON)
+		a.brightness /= 255;
+	a.color = vdiv(color(ft_atof(token[2]), ft_atof(token[3]), \
+					ft_atof(token[4])), 255);
 	element->ambient = a;
 	return (a);
 }
@@ -46,7 +49,10 @@ t_light	light(char **token, t_element *element)
 	new->origin = \
 	point(ft_atof(token[1]), ft_atof(token[2]), ft_atof(token[3]));
 	new->brightness = ft_atof(token[4]);
-	new->color = color(ft_atof(token[5]), ft_atof(token[6]), ft_atof(token[7]));
+	if (new->brightness > 1 + EPSILON)
+		new->brightness /= 255;
+	new->color = vdiv(color(ft_atof(token[5]), ft_atof(token[6]), \
+						ft_atof(token[7])), 255);
 	o = calloc(1, sizeof(t_object));
 	o->obj = new;
 	o->type = LIGHT;
@@ -59,7 +65,7 @@ t_camera	camera(char **token, t_element *element)
 	t_camera	c;
 	int			i;
 
-	if (element->camera.fov > 0.000001)
+	if (element->camera.fov > EPSILON)
 		print_exit("'%s': This object cannot be used more than once.", \
 		token[0]);
 	i = 0;
@@ -90,7 +96,8 @@ t_sphere	sphere(char **token, t_element *element)
 	c = malloc(sizeof(t_sphere));
 	c->origin = point(ft_atof(token[1]), ft_atof(token[2]), ft_atof(token[3]));
 	c->radius = ft_atof(token[4]) / 2.0;
-	c->color = color(ft_atof(token[5]), ft_atof(token[6]), ft_atof(token[7]));
+	c->color = vdiv(color(ft_atof(token[5]), ft_atof(token[6]), \
+							ft_atof(token[7])), 255);
 	o = ft_calloc(1, sizeof(t_object));
 	o->obj = c;
 	o->type = SPHERE;
@@ -113,7 +120,8 @@ t_plane	plane(char **token, t_element *element)
 	c->origin = point(ft_atof(token[1]), ft_atof(token[2]), ft_atof(token[3]));
 	c->n_vec = vunit(vec(ft_atof(token[4]), ft_atof(token[5]), \
 					ft_atof(token[6])));
-	c->color = color(ft_atof(token[7]), ft_atof(token[8]), ft_atof(token[9]));
+	c->color = vdiv(color(ft_atof(token[7]), ft_atof(token[8]), \
+							ft_atof(token[9])), 255);
 	o = ft_calloc(1, sizeof(t_object));
 	o->obj = c;
 	o->type = PLANE;

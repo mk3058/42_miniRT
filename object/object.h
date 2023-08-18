@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:29:41 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/14 12:50:52 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/17 00:01:47 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,16 @@ typedef struct s_cylinder {
 	t_color	color;
 }	t_cylinder;
 
+typedef struct s_record {
+	t_point	intersection;
+	t_vec	n_vec;
+	double	distance;
+	double	dis_max;
+	double	dis_min;
+	bool	is_front;
+	t_color	color;
+}	t_record;
+
 typedef struct s_element {
 	t_camera	camera;
 	t_ambient	ambient;
@@ -86,6 +96,7 @@ typedef struct s_element {
 	t_object	*object;
 	t_ray		ray;
 	t_color		color;
+	t_record	record;
 }	t_element;
 
 double		ft_atof(const char *str);
@@ -98,6 +109,8 @@ t_camera	camera(char **token, t_element *element);
 t_sphere	sphere(char **token, t_element *element);
 t_plane		plane(char **token, t_element *element);
 t_cylinder	cylinder(char **token, t_element *element);
+t_record	record(void);
 void		set_viewport(t_camera *camera);
+t_point		ray_at(t_ray ray, double distance);
 
 #endif
