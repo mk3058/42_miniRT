@@ -3,6 +3,8 @@
 #include "parser.h"
 #include "trace.h"
 
+int	key_hook_handler(int keycode, t_data *mlx);
+
 int	main(int argc, char **argv)
 {
 	t_data		mlx;
@@ -29,6 +31,7 @@ int	main(int argc, char **argv)
 		height++;
 	}
 	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img, 0, 0);
-	mlx_hook(mlx.mlx_win, 17, 0, &exit_win, &mlx);
+	mlx_hook(mlx.mlx_win, KEYRELEASE, KEYPRESS_MASK, key_hook_handler, &mlx);
+	mlx_hook(mlx.mlx_win, DESTROYNOTIFY, NO_MASK, exit_win, &mlx);
 	mlx_loop(mlx.mlx);
 }
