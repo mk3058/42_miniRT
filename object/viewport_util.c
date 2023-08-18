@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   viewport_util.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:12:29 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/18 00:31:50 by minkyu           ###   ########.fr       */
-/*   Updated: 2023/08/16 14:33:11 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/18 16:01:11 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "object.h"
 #include "minirt.h"
@@ -66,6 +66,10 @@ static double	get_focal_length(t_camera *camera)
 {
 	double	rad;
 
+	if (fabs(camera->fov) < EPSILON)
+		camera->fov += 1;
+	else if (fabs(camera->fov - 180) < EPSILON)
+		camera->fov -= 1;
 	rad = camera->fov * M_PI / 180;
 	rad = rad / 2.0;
 	return ((camera->viewport_height / 2.0) / tan(rad));
