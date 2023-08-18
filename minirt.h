@@ -12,6 +12,8 @@
 # define BG_R 191
 # define BG_G 239
 # define BG_B 255
+# define OBJECT_SHININESS 100
+# define SPECULAR_STRENGTH 0.5
 
 typedef struct s_data
 {
