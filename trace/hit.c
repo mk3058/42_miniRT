@@ -70,6 +70,11 @@ static bool hit_cylinder(t_cylinder *cy, t_ray *ray, t_record *record)
 	return (true);
 }
 
+static bool	hit_cone(t_cone *cn, t_ray *ray, t_record *record)
+{
+	
+}
+
 ///////////////////////////// test hit function ////////////////////////////////
 
 bool	hit(t_object *obj, t_ray *ray, t_record *rec)

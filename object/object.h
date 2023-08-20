@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imjongmin <imjongmin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:29:41 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/17 00:01:47 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/08/20 13:46:50 by imjongmin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,14 @@ typedef struct s_cylinder {
 	double	height;
 	t_color	color;
 }	t_cylinder;
+
+typedef struct s_cone {
+	t_point	center;
+	t_vec	axis;
+	double	radius;
+	double	height;
+	t_color	color;
+}	t_cone;
 
 typedef struct s_record {
 	t_point	intersection;
