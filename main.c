@@ -9,6 +9,7 @@ int	main(int argc, char **argv)
 	t_element	element;
 	int			height;
 	int			width;
+	t_cone		*c;
 
 	if (argc != 2)
 		print_exit("%s\n", "Invalid number of arguments");

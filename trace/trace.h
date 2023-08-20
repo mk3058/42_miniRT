@@ -6,7 +6,7 @@
 /*   By: imjongmin <imjongmin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:48:43 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/20 13:31:02 by imjongmin        ###   ########.fr       */
+/*   Updated: 2023/08/20 14:06:53 by imjongmin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_hit t_hit;
 struct s_hit
 {
     t_vec   w;
+    double  m;
     double  a;  
     double  b;
     double  c;

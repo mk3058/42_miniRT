@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object_constructor2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imjongmin <imjongmin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 19:39:00 by minkyu            #+#    #+#             */
-/*   Updated: 2023/08/18 13:57:02 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/20 13:56:01 by imjongmin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,32 @@ t_cylinder	cylinder(char **token, t_element *element)
 	o->type = CYLINDER;
 	o_add(&element->object, o);
 	return (*c);
+}
+
+t_cone	cone(char **token, t_element *element)
+{
+	t_cone		*cn;
+	t_object	*ob;
+	int			i;
+
+	i = 0;
+	while (token[i] != NULL)
+		i++;
+	if (i != 12)
+		print_exit("'%s': Invalid number of arguments.\n", token[0]);
+	cn = malloc(sizeof(t_cone));
+	cn->center = point(ft_atof(token[1]), ft_atof(token[2]), ft_atof(token[3]));
+	cn->axis = vunit(vec(ft_atof(token[4]), ft_atof(token[5]), \
+					ft_atof(token[6])));
+	cn->radius = ft_atof(token[7]) / 2.0;
+	cn->height = ft_atof(token[8]);
+	cn->color = vdiv(color(ft_atof(token[9]), ft_atof(token[10]), \
+							ft_atof(token[11])), 255);
+	ob = ft_calloc(1, sizeof(t_object));
+	ob->obj = cn;
+	ob->type = CONE;
+	o_add(&element->object, ob);
+	return (*cn);
 }
 
 t_record	record(void)

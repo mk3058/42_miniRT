@@ -72,7 +72,37 @@ static bool hit_cylinder(t_cylinder *cy, t_ray *ray, t_record *record)
 
 static bool	hit_cone(t_cone *cn, t_ray *ray, t_record *record)
 {
-	
+	t_hit	h_d;
+	t_point top;
+
+	h_d.m = pow(cn->radius, 2) / pow(cn->height, 2);
+	top = vadd(cn->center, vmul_(cn->axis, cn->height));
+	h_d.w = vsub(ray->orig, top);
+	h_d.a = vdot(ray->dir, ray->dir) - (h_d.m * pow(vdot(ray->dir, cn->axis), 2)) \
+	- pow(vdot(ray->dir, cn->axis), 2);
+	h_d.b = 2 * (vdot(ray->dir, h_d.w) - (h_d.m * vdot(ray->dir, cn->axis) \
+	* vdot(h_d.w, cn->axis)) - (vdot(ray->dir, cn->axis) * vdot(h_d.w, cn->axis)));
+	h_d.c = vdot(h_d.w, h_d.w) - (h_d.m * pow(vdot(h_d.w, cn->axis), 2)) - \
+	pow(vdot(h_d.w, cn->axis), 2);
+	h_d.dis = pow(h_d.b, 2) - (4 * h_d.a * h_d.c);
+	if (h_d.dis < 0)
+		return (false);
+	if (h_d.dis == 0)
+	{
+		if (vdot(ray->dir, cn->axis) != cos(h_d.a))
+			h_d.t = -(h_d.b / (2 * h_d.a));
+		else
+			return (false);
+	}
+	else
+		h_d.t = (-h_d.b - h_d.dis) / (2 * h_d.a);
+	record->distance = h_d.t;
+	record->intersection = vadd(ray->orig, vmul_(ray->dir, h_d.t));
+	record->color = cn->color;
+	if (vdot(vsub(record->intersection, top), cn->axis) > cn->height || \
+	vdot(vsub(record->intersection, top), cn->axis) < 0)
+		return (false);
+	return (true);
 }
 
 ///////////////////////////// test hit function ////////////////////////////////

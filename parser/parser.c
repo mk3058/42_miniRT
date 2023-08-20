@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imjongmin <imjongmin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 13:10:13 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/17 02:16:27 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/08/20 14:52:36 by imjongmin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	parse_line(char *str, t_element *element)
 			plane(token, element);
 		else if (ft_strncmp(token[i], "cy", 3) == 0)
 			cylinder(token, element);
+		else if (ft_strncmp(token[i], "cn", 3) == 0)
+			cone(token, element);
 		else
 			print_exit("%s\n", "Object identifier is invalid");
 		i++;
