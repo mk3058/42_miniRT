@@ -6,7 +6,7 @@
 /*   By: imjongmin <imjongmin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:48:43 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/20 12:29:27 by imjongmin        ###   ########.fr       */
+/*   Updated: 2023/08/20 13:31:02 by imjongmin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ struct s_hit
     double  t;
 };
 
-static bool	check_point(t_hit *h_d, t_ray *ray, t_cylinder *cy, t_record *r);
+bool	check_point(t_hit *h_d, t_ray *ray, t_cylinder *cy, t_record *r);
 t_vec       cal(t_point center, t_vec axis, t_point point);
-static bool check_range(t_cylinder *cy, t_ray *ray, t_record *r, double t);
+bool check_range(t_cylinder *cy, t_ray *ray, t_record *r, double t);
 
 t_ray	ray_tracing(const t_element element, double width, double height);
 t_color	ray_get_color(t_element *element);

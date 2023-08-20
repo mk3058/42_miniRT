@@ -6,13 +6,13 @@
 /*   By: imjongmin <imjongmin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:16:22 by imjongmin         #+#    #+#             */
-/*   Updated: 2023/08/20 12:33:31 by imjongmin        ###   ########.fr       */
+/*   Updated: 2023/08/20 13:30:53 by imjongmin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "trace.h"
 
-static bool check_range(t_cylinder *cy, t_ray *ray, t_record *r, double t)
+bool check_range(t_cylinder *cy, t_ray *ray, t_record *r, double t)
 {
 	double  dot;
 	dot = vdot(vsub(vmul_(ray->dir, t), vsub(cy->center, ray->orig)), cy->axis);
@@ -30,7 +30,7 @@ t_vec   cal(t_point center, t_vec axis, t_point point)
 	return (normal);
 }
 
-static bool	check_point(t_hit *h_d, t_ray *ray, t_cylinder *cy, t_record *r)
+bool	check_point(t_hit *h_d, t_ray *ray, t_cylinder *cy, t_record *r)
 {
 	if (h_d->dis < 0 || (h_d->dis == 0 && (1 - EPSILON < vdot(ray->dir, \
 		cy->axis) && vdot(ray->dir, cy->axis) < 1 + EPSILON)))
