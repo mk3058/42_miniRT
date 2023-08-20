@@ -1,4 +1,4 @@
-# 42Seoul miniRT
+# 42Seoul miniRT [![minkyuki's 42 miniRT Score](https://badge42.vercel.app/api/v2/clg0q1eyr001108ld39o4ex42/project/2991235)](https://github.com/JaeSeoKim/badge42)
 
 ## ✏️ Project Description
 42Seoul Inner circle Graphics 과제입니다
