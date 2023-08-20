@@ -99,10 +99,11 @@ static bool	hit_cone(t_cone *cn, t_ray *ray, t_record *record)
 	record->distance = h_d.t;
 	record->intersection = vadd(ray->orig, vmul_(ray->dir, h_d.t));
 	record->color = cn->color;
-	if (vdot(vsub(record->intersection, top), cn->axis) > cn->height || \
-	vdot(vsub(record->intersection, top), cn->axis) < 0)
-		return (false);
+	// if (vdot(vsub(record->intersection, top), cn->axis) > cn->height || \
+	// vdot(vsub(record->intersection, top), cn->axis) < 0)
+	// 	return (false);
 	return (true);
+	
 }
 
 ///////////////////////////// test hit function ////////////////////////////////
@@ -124,6 +125,8 @@ bool	hit(t_object *obj, t_ray *ray, t_record *rec)
 			flag = hit_plane(obj->obj, ray, &tmp);
 		else if (obj->type == CYLINDER)
 			flag = hit_cylinder(obj->obj, ray, &tmp);
+		else if(obj->type == CONE)
+			flag = hit_cone(obj->obj, ray, &tmp);
 		if (flag)
 		{
 			hit_something = true;
