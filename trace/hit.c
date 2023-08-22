@@ -50,16 +50,18 @@ static bool	hit_sphere(t_sphere *sp, t_ray *ray, t_record *rec)
 	return (true);
 }
 
-static bool hit_cylinder(t_cylinder *cy, t_ray *ray, t_record *record)
+static bool	hit_cylinder(t_cylinder *cy, t_ray *ray, t_record *record)
 {
-	t_hit   h_d;
+	t_hit	h_d;
 
 	h_d.w = vsub(ray->orig, cy->center);
 	h_d.a = vdot(ray->dir, ray->dir) - pow(vdot(ray->dir, cy->axis), 2);
-	h_d.b = 2 * (vdot(ray->dir, h_d.w) - (vdot(ray->dir, cy->axis) * vdot(h_d.w, cy->axis)));
-	h_d.c = vdot(h_d.w, h_d.w) - pow(vdot(h_d.w, cy->axis), 2) - pow(cy->radius, 2);
+	h_d.b = 2 * (vdot(ray->dir, h_d.w) - \
+	(vdot(ray->dir, cy->axis) * vdot(h_d.w, cy->axis)));
+	h_d.c = vdot(h_d.w, h_d.w) - pow(vdot(h_d.w, cy->axis), 2) - \
+	pow(cy->radius, 2);
 	h_d.dis = pow(h_d.b, 2) - (4 * h_d.a * h_d.c);
-	if (check_point(&h_d, ray, cy, record) == false)
+	if (check_point_cy(&h_d, ray, cy, record) == false)
 		return (false);
 	record->distance = h_d.t;
 	record->intersection = vadd(ray->orig, vmul_(ray->dir, h_d.t));
@@ -67,40 +69,6 @@ static bool hit_cylinder(t_cylinder *cy, t_ray *ray, t_record *record)
 	if (vdot(ray->dir, record->n_vec) > 0.000001)
 		record->n_vec = vmul_(record->n_vec, -1);
 	record->color = cy->color;
-	return (true);
-}
-
-
-bool	check_range2(t_cone *cn, t_ray *ray, t_record *r, double t)
-{
-	double	dot;
-
-	dot = vdot(vsub(vmul_(ray->dir, t), vsub(cn->center, ray->orig)), cn->axis);
-	return ((dot <= (cn->height) && (r->dis_min < t \
-	&& t < r->dis_max)) && dot >= EPSILON);
-}
-
-bool	check_point2(t_hit *h_d, t_ray *ray, t_cone *cn, t_record *r)
-{
-	if (h_d->dis < 0 || (h_d->dis == 0 && (1 - EPSILON < vdot(ray->dir, \
-		cn->axis) && vdot(ray->dir, cn->axis) < 1 + EPSILON)))
-		return (false);
-	if (h_d->dis > EPSILON)
-	{
-		h_d->t = (-h_d->b - sqrt(h_d->dis)) / (2 * h_d->a);
-		if (!check_range2(cn, ray, r, h_d->t))
-		{
-			h_d->t = (-h_d->b + sqrt(h_d->dis)) / (2 * h_d->a);
-			if (!check_range2(cn, ray, r, h_d->t))
-				return (false);
-		}
-	}
-	else if (h_d->dis == 0)
-	{
-		h_d->t = -h_d->b / (2 * h_d->a);
-		if (!check_range2(cn, ray, r, h_d->t))
-			return (false);
-	}
 	return (true);
 }
 
@@ -115,24 +83,18 @@ static bool	hit_cone(t_cone *cn, t_ray *ray, t_record *record)
 	h_d.a = 1 - (h_d.m * pow(vdot(ray->dir, cn->axis), 2)) \
 	- pow(vdot(ray->dir, cn->axis), 2);
 	h_d.b = 2 * (vdot(ray->dir, h_d.w) - (h_d.m * vdot(ray->dir, cn->axis) \
-	* vdot(h_d.w, cn->axis)) - (vdot(ray->dir, cn->axis) * vdot(h_d.w, cn->axis)));
+	* vdot(h_d.w, cn->axis)) - \
+	(vdot(ray->dir, cn->axis) * vdot(h_d.w, cn->axis)));
 	h_d.c = vdot(h_d.w, h_d.w) - (h_d.m * pow(vdot(h_d.w, cn->axis), 2)) - \
 	pow(vdot(h_d.w, cn->axis), 2);
 	h_d.dis = pow(h_d.b, 2) - (4 * h_d.a * h_d.c);
-	if (h_d.dis < 0)
-		return (false);
-	if (h_d.dis == 0)
-	{
-		if (vdot(ray->dir, cn->axis) != cn->height / \
-		sqrt(pow(cn->height, 2) + pow(cn->radius, 2)))
-			h_d.t = -(h_d.b / (2 * h_d.a));
-		else
-			return (false);
-	}
-	else if (check_point2(&h_d, ray, cn, record) == false)
+	if (check_point_cn(&h_d, ray, cn, record) == false)
 		return (false);
 	record->distance = h_d.t;
 	record->intersection = vadd(ray->orig, vmul_(ray->dir, h_d.t));
+	record->n_vec = vunit(vcrs(vsub(record->intersection, top), vcrs(vsub(record->intersection, top), cn->axis)));
+	if (vdot(ray->dir, record->n_vec) > 0.000001)
+		record->n_vec = vmul_(record->n_vec, -1);
 	record->color = cn->color;
 	return (true);
 }
