@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trace.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imjongmin <imjongmin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jonim <jonim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:48:43 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/20 14:06:53 by imjongmin        ###   ########.fr       */
+/*   Updated: 2023/08/22 13:03:04 by jonim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ struct s_hit
 bool	check_point(t_hit *h_d, t_ray *ray, t_cylinder *cy, t_record *r);
 t_vec       cal(t_point center, t_vec axis, t_point point);
 bool check_range(t_cylinder *cy, t_ray *ray, t_record *r, double t);
+bool	check_point2(t_hit *h_d, t_ray *ray, t_cone *cn, t_record *r);
+bool check_range2(t_cone *cn, t_ray *ray, t_record *r, double t);
 
 t_ray	ray_tracing(const t_element element, double width, double height);
 t_color	ray_get_color(t_element *element);
