@@ -92,7 +92,8 @@ static bool	hit_cone(t_cone *cn, t_ray *ray, t_record *record)
 		return (false);
 	record->distance = h_d.t;
 	record->intersection = vadd(ray->orig, vmul_(ray->dir, h_d.t));
-	record->n_vec = vunit(vcrs(vsub(record->intersection, top), vcrs(vsub(record->intersection, top), cn->axis)));
+	record->n_vec = vunit(vcrs(vsub(record->intersection, top), \
+	vcrs(vsub(record->intersection, top), cn->axis)));
 	if (vdot(ray->dir, record->n_vec) > 0.000001)
 		record->n_vec = vmul_(record->n_vec, -1);
 	record->color = cn->color;
