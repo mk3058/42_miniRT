@@ -2,7 +2,7 @@
 # Compile option
 NAME := miniRT
 CC := gcc
-CFLAGS := -MMD -g -fsanitize=address 
+CFLAGS := -MMD -g
 OBJ_DIR := make_object
 
 ##### Exclude Directory Settings #####
