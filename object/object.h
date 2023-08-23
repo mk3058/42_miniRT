@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imjongmin <imjongmin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:29:41 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/20 13:56:27 by imjongmin        ###   ########.fr       */
+/*   Updated: 2023/08/23 15:43:53 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ typedef struct s_element {
 	t_record	record;
 }	t_element;
 
-double		ft_atof(const char *str);
+double		ft_atof(const char *str, double min, double max);
 t_object	object(t_object **head, t_object_type type, void *object);
 void		o_add(t_object **head, t_object *new);
 t_object	*o_last(t_object *head);

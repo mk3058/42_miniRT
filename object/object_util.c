@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object_util.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:54:52 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/17 00:01:28 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/08/23 15:43:41 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,15 @@ t_point	ray_at(t_ray ray, double distance)
 	return (vadd(ray.orig, vmul_(ray.dir, distance)));
 }
 
-double	ft_atof(const char *str)
+static double	check_range(double num, double min, double max)
+{
+	if ((min >= 0 && (num - min) < -EPSILON) || \
+			(max >= 0 && (num - max) > EPSILON))
+		print_exit("%s\n", "argument valuue out of range");
+	return (num);
+}
+
+double	ft_atof(const char *str, double min, double max)
 {
 	double	result;
 	double	fraction;
@@ -70,5 +78,5 @@ double	ft_atof(const char *str)
 		fraction /= 10;
 		str++;
 	}
-	return (result * sign);
+	return (check_range(result * sign, min, max));
 }
