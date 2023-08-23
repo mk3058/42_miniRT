@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imjongmin <imjongmin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 13:10:13 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/20 14:52:36 by imjongmin        ###   ########.fr       */
+/*   Updated: 2023/08/21 12:37:46 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	parse_line(char *str, t_element *element);
 int		open_file(char *target);
+char	**ft_split(char *str, char *charset);
 
 t_element	parse_rt(char *target)
 {
@@ -30,6 +31,8 @@ t_element	parse_rt(char *target)
 		free(str);
 		str = get_next_line(fd);
 	}
+	if (vlen(element.camera.d_vec) < EPSILON)
+		print_exit("element: %s\n", "Camera must be present!");
 	return (element);
 }
 
@@ -39,7 +42,11 @@ void	parse_line(char *str, t_element *element)
 	int		i;
 
 	i = 0;
-	token = ft_split(str, " ,");
+	token = ft_split(str, " ,\n");
+	for (int i = 0; token[i]; i++)
+	{
+		printf("{token {%d}: %s}\n", i + 1, token[i]);
+	}
 	if (token[i])
 	{
 		if (ft_strncmp(token[i], "A", 3) == 0)
