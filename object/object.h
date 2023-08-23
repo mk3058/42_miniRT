@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imjongmin <imjongmin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:29:41 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/17 00:01:47 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/08/20 13:56:27 by imjongmin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ typedef enum e_object_type {
 	LIGHT,
 	SPHERE,
 	PLANE,
-	CYLINDER
+	CYLINDER,
+	CONE
 }	t_object_type;
 
 typedef struct s_object {
@@ -79,6 +80,14 @@ typedef struct s_cylinder {
 	t_color	color;
 }	t_cylinder;
 
+typedef struct s_cone {
+	t_point	center;
+	t_vec	axis;
+	double	radius;
+	double	height;
+	t_color	color;
+}	t_cone;
+
 typedef struct s_record {
 	t_point	intersection;
 	t_vec	n_vec;
@@ -109,6 +118,7 @@ t_camera	camera(char **token, t_element *element);
 t_sphere	sphere(char **token, t_element *element);
 t_plane		plane(char **token, t_element *element);
 t_cylinder	cylinder(char **token, t_element *element);
+t_cone		cone(char **token, t_element *element);
 t_record	record(void);
 void		set_viewport(t_camera *camera);
 t_point		ray_at(t_ray ray, double distance);

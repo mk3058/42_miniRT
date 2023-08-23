@@ -61,6 +61,8 @@ void	parse_line(char *str, t_element *element)
 			plane(token, element);
 		else if (ft_strncmp(token[i], "cy", 3) == 0)
 			cylinder(token, element);
+		else if (ft_strncmp(token[i], "cn", 3) == 0)
+			cone(token, element);
 		else
 			print_exit("%s\n", "Object identifier is invalid");
 		i++;
