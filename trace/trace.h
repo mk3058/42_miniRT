@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trace.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonim <jonim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:48:43 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/23 12:35:00 by jonim            ###   ########.fr       */
+/*   Updated: 2023/08/23 12:50:50 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ struct s_hit
 	double	dis;
 	double	t;
 };
+
+typedef struct s_flag {
+	bool	hit_something;
+	bool	flag;
+}	t_flag;
 
 t_vec	cal(t_point center, t_vec axis, t_point point);
 bool	check_point_cy(t_hit *h_d, t_ray *ray, t_cylinder *cy, t_record *r);

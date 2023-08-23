@@ -6,10 +6,9 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:12:29 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/18 16:01:11 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:53:13 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "object.h"
 #include "minirt.h"

@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 13:10:13 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/21 12:37:46 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:53:00 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,9 @@ void	parse_line(char *str, t_element *element)
 	char	**token;
 	int		i;
 
-	i = 0;
+	i = -1;
 	token = ft_split(str, " ,\n");
-	for (int i = 0; token[i]; i++)
-	{
-		printf("{token {%d}: %s}\n", i + 1, token[i]);
-	}
-	if (token[i])
+	if (token[++i])
 	{
 		if (ft_strncmp(token[i], "A", 3) == 0)
 			ambient(token, element);
@@ -65,7 +61,6 @@ void	parse_line(char *str, t_element *element)
 			cone(token, element);
 		else
 			print_exit("%s\n", "Object identifier is invalid");
-		i++;
 	}
 	destroy_token(token);
 }

@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:19:32 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/18 15:19:33 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:51:47 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,34 +112,31 @@ static bool	hit_cone(t_cone *cn, t_ray *ray, t_record *record)
 	return (true);
 }
 
-///////////////////////////// test hit function ////////////////////////////////
-
 bool	hit(t_object *obj, t_ray *ray, t_record *rec)
 {
-	bool			hit_something;
-	bool			flag;
+	t_flag			f;
 	t_record		tmp;
 
-	hit_something = false;
+	f.hit_something = false;
 	tmp = *rec;
 	while (obj)
 	{
-		flag = false;
+		f.flag = false;
 		if (obj->type == SPHERE)
-			flag = hit_sphere(obj->obj, ray, &tmp);
+			f.flag = hit_sphere(obj->obj, ray, &tmp);
 		else if (obj->type == PLANE)
-			flag = hit_plane(obj->obj, ray, &tmp);
+			f.flag = hit_plane(obj->obj, ray, &tmp);
 		else if (obj->type == CYLINDER)
-			flag = hit_cylinder(obj->obj, ray, &tmp);
-		else if(obj->type == CONE)
-			flag = hit_cone(obj->obj, ray, &tmp);
-		if (flag)
+			f.flag = hit_cylinder(obj->obj, ray, &tmp);
+		else if (obj->type == CONE)
+			f.flag = hit_cone(obj->obj, ray, &tmp);
+		if (f.flag)
 		{
-			hit_something = true;
+			f.hit_something = true;
 			tmp.dis_max = tmp.distance;
 			*rec = tmp;
 		}
 		obj = obj->next;
 	}
-	return (hit_something);
+	return (f.hit_something);
 }
