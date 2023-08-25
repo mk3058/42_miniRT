@@ -6,7 +6,7 @@
 
 1. Included technologies
    - Ray Tracing (https://en.wikipedia.org/wiki/Ray_tracing_(graphics))
-3. Develop Period : 2023.08.01 ~ 
+3. Develop Period : 2023.08.01 ~ 2023.08.24
 4. Contributor
    - jonim (@imjongmin123)
    - minkyuki (@mk3058)
