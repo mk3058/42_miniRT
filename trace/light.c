@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonim <jonim@student.42.fr>                +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:55:01 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/23 12:30:02 by jonim            ###   ########.fr       */
+/*   Updated: 2023/08/24 12:16:10 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ bool	in_shadow(t_element *element, t_light *light, t_ray light_ray)
 	double		light_len;
 
 	rec = record();
+	light_len = vlen(vsub(light->origin, element->record.intersection)) \
+					- EPSILON;
 	rec.dis_max = light_len;
-	light_len = vlen(vsub(light->origin, element->record.intersection));
 	if (hit(element->object, &light_ray, &rec))
 		return (true);
 	return (false);

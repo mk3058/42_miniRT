@@ -1,8 +1,8 @@
 ################################################################################
 # Compile option
 NAME := miniRT
-CC := gcc
-CFLAGS := -MMD -g
+CC := cc
+CFLAGS := -MMD -Wall -Wextra -Werror
 OBJ_DIR := make_object
 
 ##### Exclude Directory Settings #####
@@ -59,6 +59,8 @@ fclean: clean
 
 re: fclean all
 
+bonus: all
+
 -include $(DEP)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

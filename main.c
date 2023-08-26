@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:19:18 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/18 15:25:54 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/24 11:56:39 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ int	main(int argc, char **argv)
 {
 	t_data		mlx;
 	t_element	element;
-	int			height;
-	int			width;
 
 	if (argc != 2)
 		print_exit("%s\n", "Invalid number of arguments");

@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:12:29 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/08/23 12:53:13 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/08/24 11:57:24 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static t_vec	approx_top_by_position(t_camera *camera)
 	t_vec	top;
 
 	point = camera->origin;
+	top = vec(0, 0, 0);
 	if (point.x <= point.z && point.x <= -point.z)
 		top = (t_vec){-1, 0, 0};
 	else if (point.x <= point.z && point.x >= -point.z)
